@@ -3,34 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>René Favaloro - Tribute Page</title>
     <link rel="stylesheet" href="styles.css">
+    <title>Tribute Page</title>
 </head>
 <body>
     <main id="main">
-        <h1 id="title">René Favaloro - Pioneer of Coronary Bypass Surgery</h1>
-
-        <div id="img-div">
-            <img id="image" src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Rene_Favaloro.JPG" alt="Rene Favaloro" />
-            <div id="img-caption">René Favaloro, an Argentinian heart surgeon who revolutionized the field of cardiac surgery.</div>
+        <div class="theme-toggle">
+            <img src="https://files.svgcdn.io/material-symbols-light/dark-mode.svg" alt="Toggle Dark Mode" id="theme-toggle">
         </div>
-
-        <section id="tribute-info">
-            <p>
-                René Gerónimo Favaloro (1923–2000) was an Argentine cardiac surgeon best known for developing the technique of coronary artery bypass surgery.
-                He made significant contributions to the treatment of coronary artery disease, helping to save millions of lives worldwide.
-            </p>
-            <p>
-                Favaloro’s journey in medicine began in La Plata, Argentina, but his breakthrough came in 1967, when he performed the first documented
-                coronary bypass surgery at the Cleveland Clinic in the United States. His revolutionary work remains a cornerstone of cardiac surgery.
-            </p>
-            <p>
-                Beyond his surgical accomplishments, Favaloro was dedicated to improving healthcare access, education, and social justice. He returned to
-                Argentina to establish the Favaloro Foundation, a medical training and research center that continues his legacy today.
-            </p>
-        </section>
-
-        <a id="tribute-link" href="https://en.wikipedia.org/wiki/Ren%C3%A9_Favaloro" target="_blank">Learn more about René Favaloro on Wikipedia</a>
+        <h1 id="title" class="fade-in">René Favaloro - Pioneer of Coronary Bypass Surgery</h1>
+        <div id="img-div" class="fade-in">
+            <img id="image" src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Rene_Favaloro.JPG" alt="Rene Favaloro">
+            <div id="img-caption" class="fade-in">René Favaloro, an Argentinian heart surgeon who revolutionized the field of cardiac surgery.</div>
+        </div>
+        <div id="tribute-info" class="fade-in">
+            René Gerónimo Favaloro (1923–2000) was an Argentine cardiac surgeon best known for developing the technique of coronary artery bypass surgery. He made significant contributions to the treatment of coronary artery disease, helping to save millions of lives worldwide. Favaloro's journey in medicine began in La Plata, Argentina, but his breakthrough came in 1967, when he performed the first documented coronary bypass surgery at the Cleveland Clinic in the United States. His revolutionary work remains a cornerstone of cardiac surgery. Beyond his surgical accomplishments, Favaloro was dedicated to improving healthcare access, education, and social justice. He returned to Argentina to establish the Favaloro Foundation, a medical training and research center that continues his legacy today.
+        </div>
+        <a id="tribute-link" class="fade-in" href="https://en.wikipedia.org/wiki/Ren%C3%A9_Favaloro" target="_blank">Learn more about René Favaloro on Wikipedia</a>
     </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const elementsToShow = document.querySelectorAll('.fade-in');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            elementsToShow.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Dark Mode Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+            });
+        });
+    </script>
 </body>
 </html>
